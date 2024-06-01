@@ -8,19 +8,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-image: url('2.jpg');
             background-repeat: no-repeat;
             background-attachment: fixed;
+            background-size: cover;
         }
 
         #background-audio {
             opacity: 0.5;
-        }
-
-        @media (max-width: 1024px) {
-            body {
-                background-size: cover;
-            }
         }
 
         @media (max-width: 768px) {
@@ -54,6 +48,44 @@
     </audio>
     
     <script>
+        const audioList = [
+            'music.mp3',
+            'music2.mp3',
+            'music3.mp3',
+            'music4.mp3',
+            'music5.mp3',
+            // Add more audio sources here
+        ];
+
+        const imageList = [
+            '1.jpg',
+            '2.jpg',
+            '3.jpg',
+            '13.jpg',
+            '12.jpg',
+            '6.jpg',
+            '7.jpg',
+            '8.jpg',
+            '9.jpg',
+            '10.jpg',
+            '11.jpg',
+            // Add more image sources here
+        ];
+
+        function changeMedia() {
+            // Change audio source
+            const audio = document.getElementById('background-audio');
+            const randomAudio = audioList[Math.floor(Math.random() * audioList.length)];
+            audio.src = randomAudio;
+            audio.load(); // Load the new audio source
+
+            // Change background image
+            const randomImage = imageList[Math.floor(Math.random() * imageList.length)];
+            document.body.style.backgroundImage = `url(${randomImage})`;
+        }
+
+        setInterval(changeMedia, 600000); // Change media every 10 minutes
+
         // Countdown Timer Script
         function updateCountdown() {
             const countdownElement = document.getElementById('countdown');
@@ -75,6 +107,9 @@
         }
 
         const interval = setInterval(updateCountdown, 1000);
+
+        // Initial media change on page load
+        changeMedia();
     </script>
 </body>
 </html>
