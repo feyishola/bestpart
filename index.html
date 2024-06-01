@@ -8,28 +8,51 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-image: url(2.jpg); 
-            /* background-size: cover; */
+            background-image: url('2.jpg');
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
 
-        #background-audio{
-            opacity: 0.1;
+        #background-audio {
+            opacity: 0.5;
+        }
+
+        @media (max-width: 1024px) {
+            body {
+                background-size: cover;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            #countdown {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            h1 {
+                font-size: 5rem;
+            }
+            #countdown {
+                font-size: 4rem;
+            }
         }
     </style>
 </head>
 <body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen">
-  
-    <div class="relative z-10 text-center">
+    <div class="relative z-10 text-center mb-5">
         <h1 class="text-5xl font-bold mb-8">Countdown to Halal Certification</h1>
         <div id="countdown" class="text-4xl font-mono"></div>
     </div>
     
-    <audio controls autoplay loop  id="background-audio" >
+    <audio controls autoplay loop id="background-audio">
         <source src="music.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-      </audio>
+        Your browser does not support the audio element.
+    </audio>
+    
     <script>
         // Countdown Timer Script
         function updateCountdown() {
