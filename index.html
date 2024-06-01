@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+    <link rel="icon" href="13.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url(2.jpg); 
+            /* background-size: cover; */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        #background-audio{
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen">
+  
+    <div class="relative z-10 text-center">
+        <h1 class="text-5xl font-bold mb-8">Countdown to Halal Certification</h1>
+        <div id="countdown" class="text-4xl font-mono"></div>
+    </div>
+    
+    <audio controls autoplay loop  id="background-audio" >
+        <source src="music.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+      </audio>
+    <script>
+        // Countdown Timer Script
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            const eventDate = new Date('2024-12-06T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (distance < 0) {
+                clearInterval(interval);
+                countdownElement.innerHTML = "EXPIRED";
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
