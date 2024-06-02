@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Wedding</title>
+    <link rel="icon" href="13.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('test.jpg'); /* Fixed background image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .countdown {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeIn 3s ease-out forwards;
+            animation-delay: 2s;
+        }
+
+        .gallery img {
+            border-radius: 10px;
+            width: 100%;
+            max-width: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .gallery img {
+                max-width: 100%;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .gallery {
+                flex-direction: row;
+            }
+
+            .gallery img {
+                max-width: calc(33.33% - 20px); /* 3 images with gap */
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen relative">
+    <div class="container mx-auto px-4 text-center mb-8 relative z-10">
+        <h1 class="text-5xl font-bold mb-4 opacity-90 animate__animated animate__fadeIn">Countdown to Halal Certification</h1>
+        <div id="countdown" class="countdown text-4xl font-mono"></div>
+    </div>
+
+    <div class="gallery" id="gallery">
+        <!-- Initially empty, images will be added by JavaScript -->
+    </div>
+    
+    <audio controls autoplay loop id="background-audio">
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        // Countdown Timer Script
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            const eventDate = new Date('2024-12-06T00:00:00').getTime(); // Replace with your event date
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (distance < 0) {
+                clearInterval(interval);
+                countdownElement.innerHTML = "Alhamdulilah We are Married! Barika Lah Fi to Us";
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+
+        // Function to change audio every 3 minutes
+        const audioTracks = ['music2.mp3', 'music3.mp3', 'music4.mp3', 'music5.mp3','music6.mp3', 'music7.mp3', 'music8.mp3', 'music9.mp3', 'music10.mp3', 'music11.mp3'];
+
+        function changeAudio() {
+            const randomAudio = audioTracks[Math.floor(Math.random() * audioTracks.length)];
+            const audioElement = document.getElementById('background-audio');
+            audioElement.src = randomAudio;
+            audioElement.play();
+        }
+
+        setInterval(changeAudio, 180000); // Change every 3 minutes
+
+        // Function to shuffle and display 3 random images (or 1 on mobile)
+        function shuffleGallery() {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = ''; // Clear current images
+
+            // Shuffle images array
+            const images = [
+                '1.jpg',
+                '21.jpeg',
+                '13.jpg',
+                '18.jpeg',
+                '11.jpg',
+                '14.jpeg',
+                '2.jpg',
+                '15.jpeg',
+                '16.jpeg',
+                '17.jpeg',
+                '10.jpg',
+                '19.jpeg',
+                '12.jpg',
+                '20.jpeg',
+                '22.jpeg',
+                '23.jpeg',
+                '24.jpeg',
+                '25.jpeg',
+                '26.jpeg',
+                '27.jpeg',
+                '3.jpg'
+            ];
+            const shuffledImages = images.sort(() => 0.5 - Math.random());
+
+            // Determine number of images to display based on screen width
+            const numImagesToShow = window.innerWidth < 769 ? 1 : 3;
+
+            // Select and display the appropriate number of images
+            for (let i = 0; i < numImagesToShow; i++) {
+                const img = document.createElement('img');
+                img.src = shuffledImages[i];
+                img.alt = `Prewedding Photo ${i + 1}`;
+                gallery.appendChild(img);
+            }
+        }
+
+        window.addEventListener('resize', shuffleGallery); // Shuffle on resize to adjust for screen size
+        shuffleGallery(); // Initial shuffle
+        setInterval(shuffleGallery, 5000); // Shuffle every 5 seconds
+    </script>
+</body>
+</html>
