@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+    <link rel="icon" href="13.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: auto;
+        }
+
+        #background-audio {
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            #countdown {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            h1 {
+                font-size: 5rem;
+            }
+            #countdown {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen">
+    <div class="relative z-10 text-center mb-5">
+        <h1 class="text-5xl font-bold mb-8 opacity-70 text-red-200">Countdown to Halal Certification</h1>
+        <div id="countdown" class="text-4xl font-mono text-red-700"></div>
+    </div>
+    
+    <audio controls autoplay loop id="background-audio">
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        const audioList = [
+            'music.mp3',
+            'music2.mp3',
+            'music3.mp3',
+            'music4.mp3',
+            'music5.mp3',
+            'music6.mp3',
+            'music7.mp3',
+            'music8.mp3',
+            'music9.mp3',
+            'music10.mp3',
+            'music11.mp3',
+            // Add more audio sources here
+        ];
+
+        const imageList = [
+            'test.jpeg',
+            '1.jpg',
+            '21.jpeg',
+            '13.jpg',
+            '18.jpeg',
+            '11.jpg',
+            '14.jpeg',
+            'test.jpeg',
+            '2.jpg',
+            '15.jpeg',
+            '16.jpeg',
+            '17.jpeg',
+            '10.jpg',
+            'test.jpeg',
+            '19.jpeg',
+            '12.jpg',
+            '20.jpeg',
+            '22.jpeg',
+            '23.jpeg',
+            'test.jpeg',
+            '24.jpeg',
+            '25.jpeg',
+            '26.jpeg',
+            '27.jpeg',
+            '3.jpg',
+            'test.jpeg',
+            // Add more image sources here
+        ];
+
+        function changeMedia() {
+            // Change audio source
+            const audio = document.getElementById('background-audio');
+            const randomAudio = audioList[Math.floor(Math.random() * audioList.length)];
+            audio.src = randomAudio;
+            audio.load(); // Load the new audio source
+
+            // Change background image
+            const randomImage = imageList[Math.floor(Math.random() * imageList.length)];
+            document.body.style.backgroundImage = `url(${randomImage})`;
+        }
+
+        setInterval(changeMedia, 300000); // Change media every 5 minutes
+
+        // Countdown Timer Script
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            const eventDate = new Date('2024-12-06T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (distance < 0) {
+                clearInterval(interval);
+                countdownElement.innerHTML = "CONGRATULATIONS Mr and Mrs Ologunebi";
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+
+        // Initial media change on page load
+        changeMedia();
+    </script>
+</body>
+</html>

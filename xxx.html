@@ -90,7 +90,28 @@
     </div>
 
     <div class="gallery" id="gallery">
-        <!-- Initially empty, images will be added by JavaScript -->
+        <img src="1.jpg" alt="Prewedding Photo 1">
+        <img src="20.jpeg" alt="Prewedding Photo 2">
+        <img src="15.jpeg" alt="Prewedding Photo 3">
+        <img src="21.jpeg" alt="Prewedding Photo 4">
+        <img src="13.jpg" alt="Prewedding Photo 5">
+        <img src="18.jpeg" alt="Prewedding Photo 6">
+        <img src="11.jpg" alt="Prewedding Photo 7">
+        <img src="14.jpeg" alt="Prewedding Photo 8">
+        <img src="2.jpg" alt="Prewedding Photo 10">
+        <img src="16.jpeg" alt="Prewedding Photo 11">
+        <img src="17.jpeg" alt="Prewedding Photo 12">
+        <img src="10.jpg" alt="Prewedding Photo 13">
+        <img src="19.jpeg" alt="Prewedding Photo 14">
+        <img src="12.jpg" alt="Prewedding Photo 15">
+        <img src="22.jpeg" alt="Prewedding Photo 16">
+        <img src="23.jpeg" alt="Prewedding Photo 17">
+        <img src="24.jpeg" alt="Prewedding Photo 18">
+        <img src="25.jpeg" alt="Prewedding Photo 19">
+        <img src="26.jpeg" alt="Prewedding Photo 20">
+        <img src="27.jpeg" alt="Prewedding Photo 21">
+        <img src="3.jpg" alt="Prewedding Photo 22">
+        <!-- Add more images as needed -->
     </div>
     
     <audio controls autoplay loop id="background-audio">
@@ -129,23 +150,25 @@
             '18.jpeg',
             '11.jpg',
             '14.jpeg',
+            'test.jpeg',
             '2.jpg',
             '15.jpeg',
             '16.jpeg',
             '17.jpeg',
             '10.jpg',
+            'test.jpeg',
             '19.jpeg',
             '12.jpg',
             '20.jpeg',
             '22.jpeg',
             '23.jpeg',
+            'test.jpeg',
             '24.jpeg',
             '25.jpeg',
             '26.jpeg',
             '27.jpeg',
             '3.jpg'
         ];
-
         const audioTracks = ['music.mp3', 'music2.mp3', 'music3.mp3', 'music4.mp3', 'music5.mp3','music6.mp3', 'music7.mp3', 'music8.mp3', 'music9.mp3', 'music10.mp3', 'music11.mp3'];
 
         function changeBackgroundAndAudio() {
@@ -160,24 +183,16 @@
 
         setInterval(changeBackgroundAndAudio, 600000); // Change every 10 minutes
 
-        // Function to shuffle and display 3 random images
+        // Function to shuffle the positions of the images
         function shuffleGallery() {
             const gallery = document.getElementById('gallery');
-            gallery.innerHTML = ''; // Clear current images
-
-            // Shuffle images array
-            const shuffledImages = images.sort(() => 0.5 - Math.random());
-
-            // Select first 3 images and display them
-            for (let i = 0; i < 3; i++) {
-                const img = document.createElement('img');
-                img.src = shuffledImages[i];
-                img.alt = `Prewedding Photo ${i + 1}`;
-                gallery.appendChild(img);
+            const images = Array.from(gallery.getElementsByTagName('img'));
+            for (let i = images.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                gallery.appendChild(images[j]);
             }
         }
 
-        shuffleGallery(); // Initial shuffle
         setInterval(shuffleGallery, 5000); // Shuffle every 5 seconds
     </script>
 </body>
