@@ -10,6 +10,9 @@
         body {
             background-color: #f9f9f9;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('test.jpg'); /* Fixed background image */
+            background-size: cover;
+            background-position: center;
         }
 
         .countdown {
@@ -88,7 +91,7 @@
 </head>
 <body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen relative">
     <div class="container mx-auto px-4 text-center mb-8 relative z-10">
-        <h1 class="text-5xl font-bold mb-4 opacity-70 animate__animated animate__fadeIn">Countdown to Halal Certification</h1>
+        <h1 class="text-5xl font-bold mb-4 opacity-90 animate__animated animate__fadeIn">Countdown to Halal Certification</h1>
         <div id="countdown" class="countdown text-4xl font-mono"></div>
     </div>
 
@@ -105,7 +108,7 @@
         // Countdown Timer Script
         function updateCountdown() {
             const countdownElement = document.getElementById('countdown');
-            const eventDate = new Date('2024-12-06T00:00:00').getTime(); // Replace with your wedding date
+            const eventDate = new Date('2024-12-06T00:00:00').getTime(); // Replace with your event date
             const now = new Date().getTime();
             const distance = eventDate - now;
 
@@ -118,50 +121,23 @@
 
             if (distance < 0) {
                 clearInterval(interval);
-                countdownElement.innerHTML = "WE'RE MARRIED!";
+                countdownElement.innerHTML = "Alhamdulilah We are Married! Barika Lah Fi to Us";
             }
         }
 
         const interval = setInterval(updateCountdown, 1000);
 
-        // Function to change background image and audio every 10 minutes
-        const images = [
-            '1.jpg',
-            '21.jpeg',
-            '13.jpg',
-            '18.jpeg',
-            '11.jpg',
-            '14.jpeg',
-            '2.jpg',
-            '15.jpeg',
-            '16.jpeg',
-            '17.jpeg',
-            '10.jpg',
-            '19.jpeg',
-            '12.jpg',
-            '20.jpeg',
-            '22.jpeg',
-            '23.jpeg',
-            '24.jpeg',
-            '25.jpeg',
-            '26.jpeg',
-            '27.jpeg',
-            '3.jpg'
-        ];
-
+        // Function to change audio every 3 minutes
         const audioTracks = ['music.mp3', 'music2.mp3', 'music3.mp3', 'music4.mp3', 'music5.mp3','music6.mp3', 'music7.mp3', 'music8.mp3', 'music9.mp3', 'music10.mp3', 'music11.mp3'];
 
-        function changeBackgroundAndAudio() {
-            const randomImage = images[Math.floor(Math.random() * images.length)];
+        function changeAudio() {
             const randomAudio = audioTracks[Math.floor(Math.random() * audioTracks.length)];
-            
-            document.body.style.backgroundImage = `url('${randomImage}')`;
             const audioElement = document.getElementById('background-audio');
             audioElement.src = randomAudio;
             audioElement.play();
         }
 
-        setInterval(changeBackgroundAndAudio, 300000); // Change every 10 minutes
+        setInterval(changeAudio, 180000); // Change every 3 minutes
 
         // Function to shuffle and display 3 random images (or 1 on mobile)
         function shuffleGallery() {
@@ -169,6 +145,29 @@
             gallery.innerHTML = ''; // Clear current images
 
             // Shuffle images array
+            const images = [
+                '1.jpg',
+                '21.jpeg',
+                '13.jpg',
+                '18.jpeg',
+                '11.jpg',
+                '14.jpeg',
+                '2.jpg',
+                '15.jpeg',
+                '16.jpeg',
+                '17.jpeg',
+                '10.jpg',
+                '19.jpeg',
+                '12.jpg',
+                '20.jpeg',
+                '22.jpeg',
+                '23.jpeg',
+                '24.jpeg',
+                '25.jpeg',
+                '26.jpeg',
+                '27.jpeg',
+                '3.jpg'
+            ];
             const shuffledImages = images.sort(() => 0.5 - Math.random());
 
             // Determine number of images to display based on screen width
